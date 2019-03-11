@@ -84,9 +84,16 @@ class TestRefine(unittest.TestCase):
         # csv 파싱 하여 결과가 3이어야 한다.
         self.assertEqual(len(res), 3)
         # index 에 맞는 문자열이 출력되어야 한다.
-        self.assertEqual(res[0], 'apiname1')
-        self.assertEqual(res[1], 'apiname2')
-        self.assertEqual(res[2], 'apiname3')
+        self.assertEqual(res['apiname1'], 0)
+        self.assertEqual(res['apiname2'], 1)
+        self.assertEqual(res['apiname3'], 2)
+
+    def test_data_check(self):
+        index_filepath = os.path.join(base_path, 'apiname_index.csv')
+        res = api_index(index_filepath)
+        self.assertEqual(res['AssignProcessToJobObject'], 0)
+        self.assertEqual(res['CIFrameElement_CreateElement'], 4)
+
 
 if __name__ == "__main__":
     unittest.main()
